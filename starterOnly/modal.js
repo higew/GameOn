@@ -12,6 +12,8 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const modalClose = document.querySelectorAll(".close");
+const firstName = document.getElementById('first');
+const lastName = document.getElementById('last');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -27,4 +29,50 @@ function launchModal() {
 // close modal form
 function closeModal (){
   modalbg.style.display = "none";
+}
+
+
+// eventListener
+
+firstName.addEventListener('input', isFirstNameValid);
+lastName.addEventListener('input', isLastNameValid);
+
+// function check input
+
+function showError(el) {
+  el.setAttribute('data-error-visible', true);
+}
+
+function hideError(el) {
+  el.setAttribute('data-error-visible', false)
+}
+
+function isFirstNameValid () {
+  const parent = firstName.closest('div');
+  showError(parent);
+  if (firstName.value.length < 2) {
+    return false;
+  } 
+  
+  if (!/^([^0-9]*)$/.test(firstName.value)) {
+    return false;
+  }
+
+  hideError(parent);
+  return true;
+}
+
+function isLastNameValid () {
+  const parent = lastName.closest('div');
+  showError(parent);
+  if (lastName.value.length < 2) {
+    return false;
+  } 
+  
+  if (!/^([^0-9]*)$/.test(lastName.value)) {
+    return false;
+  }
+
+  hideError(parent);
+  return true;
 }
