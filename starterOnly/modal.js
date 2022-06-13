@@ -50,13 +50,10 @@ function hideError(el) {
 function isFirstNameValid () {
   const parent = firstName.closest('div');
   showError(parent);
-  if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-Za-z]+$/.test(firstName.value)) {
+  // if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-zÀ-ÿ][A-zÀ-ÿ-][A-zÀ-ÿ]+$/.test(firstName.value)) {
+  if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-zÀ-ÿ]+(?:-?[A-zÀ-ÿ]+)+$/.test(firstName.value)) {
     return false;
   } 
-
-  else {
-
-  }
 
   hideError(parent);
   return true;
@@ -65,13 +62,9 @@ function isFirstNameValid () {
 function isLastNameValid () {
   const parent = lastName.closest('div');
   showError(parent);
-  if (lastName.value.length < 2) {
+  if (lastName.value.trim().length < 2 || lastName.value.trim() === "" || !/^[A-zÀ-ÿ]+(?:-?[A-zÀ-ÿ]+)+$/.test(lastName.value)) {
     return false;
   } 
-  
-  if (!/^([^0-9]*)$/.test(lastName.value)) {
-    return false;
-  }
 
   hideError(parent);
   return true;
