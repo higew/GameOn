@@ -50,12 +50,12 @@ function hideError(el) {
 function isFirstNameValid () {
   const parent = firstName.closest('div');
   showError(parent);
-  if (firstName.value.length < 2) {
+  if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-Za-z]+$/.test(firstName.value)) {
     return false;
   } 
-  
-  if (!/^([^0-9]*)$/.test(firstName.value)) {
-    return false;
+
+  else {
+
   }
 
   hideError(parent);
