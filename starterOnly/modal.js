@@ -16,6 +16,7 @@ const firstName = document.getElementById('first');
 const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const birthdate = document.getElementById('birthdate');
+const quantity = document.getElementById('quantity');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -40,6 +41,7 @@ firstName.addEventListener('input', isFirstNameValid);
 lastName.addEventListener('input', isLastNameValid);
 email.addEventListener('input', isEmailValid);
 birthdate.addEventListener('input', isBirthdateValid);
+quantity.addEventListener('input', isQuantityValid);
 
 // function check input
 
@@ -100,6 +102,19 @@ function isBirthdateValid () {
 
   //verify date input value to be formated like YYYY-MM-DD (HTML input type date format)
   if (!/^\d{4}(\-)(((0)[1-9])|((1)[0-2]))(\-)([0-2][0-9]|(3)[0-1])$/.test(birthdate.value)) {
+    return false;
+  }
+
+  hideError(parent);
+  return true;
+}
+
+function isQuantityValid () {
+  const parent = quantity.closest('div');
+  showError(parent);
+
+  //
+  if (quantity.value < 0) {
     return false;
   }
 
