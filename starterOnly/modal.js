@@ -18,8 +18,11 @@ const email = document.getElementById('email');
 const birthdate = document.getElementById('birthdate');
 const quantity = document.getElementById('quantity');
 const radioButtons = document.querySelectorAll('input[name="location"]')
-const btnSubmit = document.getElementsByClassName('btn-submit');
+//const btnSubmit = document.getElementsByClassName('btn-submit');
+const btnSubmit = document.getElementById('btn-submit');
 const checkCondition = document.getElementById('checkbox1');
+
+disableBtnSubmit ();
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -45,8 +48,10 @@ lastName.addEventListener('input', isLastNameValid);
 email.addEventListener('input', isEmailValid);
 birthdate.addEventListener('input', isBirthdateValid);
 quantity.addEventListener('input', isQuantityValid);
-btnSubmit[0].addEventListener('click', isLocationChecked);
+btnSubmit.addEventListener('click', isLocationChecked);
+radioButtons[0].addEventListener('change', isLocationChecked);
 checkCondition.addEventListener('change', isConditionChecked);
+document.querySelector('form').addEventListener('change', isFormValid);
 
 // function check input
 
@@ -128,12 +133,15 @@ function isQuantityValid () {
 }
 
 function isLocationChecked () {
-  const parent = radioButtons.closest('div');
+  const parent = radioButtons[0].closest('div');
+  showError(parent);
+  
   let selectedCity;
   for (const radioButton of radioButtons) {
       if (radioButton.checked) {
           selectedCity = radioButton.value;
-          break;
+          hideError(parent);
+          return true;
       }
       else {
         showError(parent);
@@ -152,4 +160,35 @@ function isConditionChecked () {
 
   hideError(parent);
   return true;
+}
+
+function disableBtnSubmit () {
+  btnSubmit.disabled = true;
+  btnSubmit.style.opacity = '0.5';
+  btnSubmit.style.background = 'grey';
+  btnSubmit.style.cursor = 'not-allowed';
+}
+
+function enableBtnSubmit () {
+  btnSubmit.disabled = false;
+  btnSubmit.style.opacity = '1';
+  btnSubmit.style.background = '#fe142f';
+  btnSubmit.style.cursor = 'pointer';
+}
+
+function isFormValid() {
+
+  if (isFirstNameValid ()
+      && isLastNameValid ()
+      && isEmailValid ()
+      && isBirthdateValid ()
+      && isQuantityValid ()
+      && isLocationChecked ()
+      && isConditionChecked()) {
+        enableBtnSubmit();
+        return true;
+      }
+
+      disableBtnSubmit();
+      return false;
 }
