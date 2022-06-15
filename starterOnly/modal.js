@@ -17,6 +17,9 @@ const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const birthdate = document.getElementById('birthdate');
 const quantity = document.getElementById('quantity');
+const radioButtons = document.querySelectorAll('input[name="location"]')
+const btnSubmit = document.getElementsByClassName('btn-submit');
+const checkCondition = document.getElementById('checkbox1');
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -42,6 +45,8 @@ lastName.addEventListener('input', isLastNameValid);
 email.addEventListener('input', isEmailValid);
 birthdate.addEventListener('input', isBirthdateValid);
 quantity.addEventListener('input', isQuantityValid);
+btnSubmit[0].addEventListener('click', isLocationChecked);
+checkCondition.addEventListener('change', isConditionChecked);
 
 // function check input
 
@@ -113,10 +118,37 @@ function isQuantityValid () {
   const parent = quantity.closest('div');
   showError(parent);
 
-  //
-  if (quantity.value < 0) {
+  // verify that the input number is not negative and not empty
+  if (quantity.value < 0 || quantity.value.trim() === "") {
     return false;
   }
+
+  hideError(parent);
+  return true;
+}
+
+function isLocationChecked () {
+  const parent = radioButtons.closest('div');
+  let selectedCity;
+  for (const radioButton of radioButtons) {
+      if (radioButton.checked) {
+          selectedCity = radioButton.value;
+          break;
+      }
+      else {
+        showError(parent);
+        return false;
+      }
+  }
+}
+
+function isConditionChecked () {
+  const parent = checkCondition.closest('div');
+  showError(parent);
+
+  if (!checkCondition.checked) {
+    return false;
+  } 
 
   hideError(parent);
   return true;
