@@ -136,6 +136,7 @@ function isLocationChecked () {
   const parent = radioButtons[0].closest('div');
   showError(parent);
   
+  //get all the radio buttons and verify that one is checked
   let selectedCity;
   for (const radioButton of radioButtons) {
       if (radioButton.checked) {
@@ -153,7 +154,7 @@ function isLocationChecked () {
 function isConditionChecked () {
   const parent = checkCondition.closest('div');
   showError(parent);
-
+  //checking if the first checkbox is checked
   if (!checkCondition.checked) {
     return false;
   } 
@@ -163,6 +164,7 @@ function isConditionChecked () {
 }
 
 function disableBtnSubmit () {
+  //change submit button to be unclickable
   btnSubmit.disabled = true;
   btnSubmit.style.opacity = '0.5';
   btnSubmit.style.background = 'grey';
@@ -170,6 +172,7 @@ function disableBtnSubmit () {
 }
 
 function enableBtnSubmit () {
+  //submit button back to normal mode
   btnSubmit.disabled = false;
   btnSubmit.style.opacity = '1';
   btnSubmit.style.background = '#fe142f';
@@ -177,7 +180,7 @@ function enableBtnSubmit () {
 }
 
 function isFormValid() {
-
+  //verify if every conditions are true
   if (isFirstNameValid ()
       && isLastNameValid ()
       && isEmailValid ()
