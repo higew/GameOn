@@ -17,9 +17,10 @@ const lastName = document.getElementById('last');
 const email = document.getElementById('email');
 const birthdate = document.getElementById('birthdate');
 const quantity = document.getElementById('quantity');
-const radioButtons = document.querySelectorAll('input[name="location"]')
+const radioButtons = document.querySelectorAll('input[name="location"]');
+const btnSubmit = document.querySelector('.btn-submit');
 //const btnSubmit = document.getElementsByClassName('btn-submit');
-const btnSubmit = document.getElementById('btn-submit');
+//const btnSubmit = document.getElementById('btn-submit');
 const checkCondition = document.getElementById('checkbox1');
 
 disableBtnSubmit ();
@@ -99,10 +100,12 @@ function isEmailValid () {
 
   //verify that only letter, number and (underscore or hyphen) are written before the @ and same for the hosting name after the @ + verify that only 2-5 letter only after the dot
   if (!/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/.test(email.value)) {
+    console.log(email.value);
     return false;
   }
 
   hideError(parent);
+  console.log(email.value);
   return true;
 }
 
@@ -111,11 +114,18 @@ function isBirthdateValid () {
   showError(parent);
 
   //verify date input value to be formated like YYYY-MM-DD (HTML input type date format)
-  if (!/^\d{4}(\-)(((0)[1-9])|((1)[0-2]))(\-)([0-2][0-9]|(3)[0-1])$/.test(birthdate.value)) {
+  if (birthdate.value.trim().length !== 10 && !/^\d{4}(\-)(((0)[1-9])|((1)[0-2]))(\-)([0-2][0-9]|(3)[0-1])$/.test(birthdate.value)) {
+    if (birthdate.value.trim().length !== 10) {
+      console.log(birthdate.value + " n'est pas égal à 10 char");
+    }
+    else {
+      console.log("La valeur entré n'est pas bonne");
+    }
     return false;
   }
 
   hideError(parent);
+  console.log(birthdate.value);
   return true;
 }
 
