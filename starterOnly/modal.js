@@ -22,6 +22,7 @@ const btnSubmit = document.querySelector('.btn-submit');
 //const btnSubmit = document.getElementsByClassName('btn-submit');
 //const btnSubmit = document.getElementById('btn-submit');
 const checkCondition = document.getElementById('checkbox1');
+const modalBody = document.querySelector(".modal-body");
 
 disableBtnSubmit ();
 
@@ -43,7 +44,6 @@ function closeModal (){
 
 
 // eventListener
-
 firstName.addEventListener('input', isFirstNameValid);
 lastName.addEventListener('input', isLastNameValid);
 email.addEventListener('input', isEmailValid);
@@ -58,12 +58,12 @@ document.querySelector('form').addEventListener('change', isFormValid);
 
 // function check input
 
-function showError(el) {
-  el.setAttribute('data-error-visible', true);
+function showError(element) {
+  element.setAttribute('data-error-visible', true);
 }
 
-function hideError(el) {
-  el.setAttribute('data-error-visible', false)
+function hideError(element) {
+  element.setAttribute('data-error-visible', false)
 }
 
 function isFirstNameValid () {
@@ -213,19 +213,39 @@ function enableBtnSubmit () {
   btnSubmit.style.cursor = 'pointer';
 }
 
-function isFormValid() {
+function isFormValid () {
   //verify if every conditions are true
-  if (isFirstNameValid ()
-      && isLastNameValid ()
-      && isEmailValid ()
-      && isBirthdateValid ()
-      && isQuantityValid ()
-      && isLocationChecked ()
-      && isConditionChecked()) {
-        enableBtnSubmit();
-        return true;
-      }
+  if (isFirstNameValid () && isLastNameValid () && isEmailValid () && isBirthdateValid () && isQuantityValid () && isLocationChecked () && isConditionChecked()) {
+    enableBtnSubmit();
+    return true;
+  }
 
-      disableBtnSubmit();
-      return false;
+  disableBtnSubmit();
+  return false;
+}
+
+function validate () {
+  document.querySelector('.modal-body').innerHTML = " ";
+  modalBody.style.height = "800px";
+  modalBody.style.display = "flex";
+  modalBody.style.flexDirection = "column";
+  modalBody.style.alignItems = "center";
+  modalBody.style.justifyContent = "flex-end";
+  contentValidate();
+}
+
+function contentValidate () {
+  const text = document.createElement("P");
+  text.innerText = 'Merci pour votre inscription';              
+  document.querySelector('.modal-body').appendChild(text);
+  text.style.fontWeight = "300";
+  text.style.fontSize = "30px";
+  text.style.textAlign = "center";
+  //text.style.justifyContent = "space-between";
+  const btn = document.createElement("BUTTON");
+  btn.innerHTML = "Fermer";
+  document.querySelector('.modal-body').appendChild(btn);
+  btn.className = "btn-submit";
+  btn.style.marginTop = "320px";
+  //btn.onclick = closeModal();
 }
