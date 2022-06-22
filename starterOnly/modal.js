@@ -50,7 +50,9 @@ email.addEventListener('input', isEmailValid);
 birthdate.addEventListener('input', isBirthdateValid);
 quantity.addEventListener('input', isQuantityValid);
 btnSubmit.addEventListener('click', isLocationChecked);
-radioButtons[0].addEventListener('change', isLocationChecked);
+for (var i = 0 ; i < radioButtons.length; i++) {
+  radioButtons[i].addEventListener('click', isLocationChecked) ; 
+}
 checkCondition.addEventListener('change', isConditionChecked);
 document.querySelector('form').addEventListener('change', isFormValid);
 
@@ -68,8 +70,7 @@ function isFirstNameValid () {
   const parent = firstName.closest('div');
   showError(parent);
 
-  //Old regex ghetto
-
+  //Old regex
   // if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-zÀ-ÿ][A-zÀ-ÿ-][A-zÀ-ÿ]+$/.test(firstName.value)) {
 
   //Regex is Allowing Accent and also hyphen between names but not before and after names and also deny double hyphen
@@ -113,7 +114,7 @@ function isBirthdateValid () {
   const parent = birthdate.closest('div');
   showError(parent);
 
-  //verify date input value to be formated like YYYY-MM-DD (HTML input type date format)
+  //verify if the date is not different than 10 char and date input value to be formated like YYYY-MM-DD (HTML input type date format)
   if (birthdate.value.trim().length !== 10 && !/^\d{4}(\-)(((0)[1-9])|((1)[0-2]))(\-)([0-2][0-9]|(3)[0-1])$/.test(birthdate.value)) {
     if (birthdate.value.trim().length !== 10) {
       console.log(birthdate.value + " n'est pas égal à 10 char");
@@ -143,22 +144,45 @@ function isQuantityValid () {
 }
 
 function isLocationChecked () {
-  const parent = radioButtons[0].closest('div');
+  var radios = document.getElementsByName('location');
+  const parent = radios[0].closest('div');
   showError(parent);
-  
+
   //get all the radio buttons and verify that one is checked
-  let selectedCity;
-  for (const radioButton of radioButtons) {
-      if (radioButton.checked) {
-          selectedCity = radioButton.value;
-          hideError(parent);
-          return true;
-      }
-      else {
-        showError(parent);
-        return false;
-      }
+  for (var radio of radios) {
+    if (radio.checked) {
+      hideError(parent);
+      console.log(radio.value);
+      return true;
+    }
   }
+  //const radioButtons = document.querySelectorAll('input[name="location"]');
+  //const parent = radioButtons[0].closest('div');
+  // for (var i = 0; i < radioButtons.length; i++) {
+  //   const parent = radioButtons[i].closest('div');
+  //   showError(parent);
+
+  //   if (!radioButtons[i].checked) {
+  //     //console.log(radioButtons.value[i]);
+  //     return false;
+  //   }
+  //   //console.log(radioButtons.value[i]);
+  //   hideError(parent);
+  //   return true;
+  // }
+  //get all the radio buttons and verify that one is checked
+  // let selectedCity;
+  // for (const radioButton of radioButtons) {
+  //     if (radioButton.checked) {
+  //         selectedCity = radioButton.value;
+  //         hideError(parent);
+  //         return true;
+  //     }
+  //     else {
+  //       showError(parent);
+  //       return false;
+  //     }
+  // }
 }
 
 function isConditionChecked () {
