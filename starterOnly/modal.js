@@ -19,8 +19,6 @@ const birthdate = document.getElementById('birthdate');
 const quantity = document.getElementById('quantity');
 const radioButtons = document.querySelectorAll('input[name="location"]');
 const btnSubmit = document.querySelector('.btn-submit');
-//const btnSubmit = document.getElementsByClassName('btn-submit');
-//const btnSubmit = document.getElementById('btn-submit');
 const checkCondition = document.getElementById('checkbox1');
 const modalBody = document.querySelector(".modal-body");
 
@@ -69,9 +67,6 @@ function hideError(element) {
 function isFirstNameValid () {
   const parent = firstName.closest('div');
   showError(parent);
-
-  //Old regex
-  // if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-zÀ-ÿ][A-zÀ-ÿ-][A-zÀ-ÿ]+$/.test(firstName.value)) {
 
   //Regex is Allowing Accent and also hyphen between names but not before and after names and also deny double hyphen
   if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-zÀ-ÿ]+(?:-?[A-zÀ-ÿ]+)+$/.test(firstName.value)) {
@@ -156,33 +151,6 @@ function isLocationChecked () {
       return true;
     }
   }
-  //const radioButtons = document.querySelectorAll('input[name="location"]');
-  //const parent = radioButtons[0].closest('div');
-  // for (var i = 0; i < radioButtons.length; i++) {
-  //   const parent = radioButtons[i].closest('div');
-  //   showError(parent);
-
-  //   if (!radioButtons[i].checked) {
-  //     //console.log(radioButtons.value[i]);
-  //     return false;
-  //   }
-  //   //console.log(radioButtons.value[i]);
-  //   hideError(parent);
-  //   return true;
-  // }
-  //get all the radio buttons and verify that one is checked
-  // let selectedCity;
-  // for (const radioButton of radioButtons) {
-  //     if (radioButton.checked) {
-  //         selectedCity = radioButton.value;
-  //         hideError(parent);
-  //         return true;
-  //     }
-  //     else {
-  //       showError(parent);
-  //       return false;
-  //     }
-  // }
 }
 
 function isConditionChecked () {
@@ -225,6 +193,7 @@ function isFormValid () {
 }
 
 function validate () {
+  //clean the modal and add the text validation
   document.querySelector('.modal-body').innerHTML = " ";
   modalBody.style.height = "800px";
   modalBody.style.display = "flex";
@@ -235,19 +204,19 @@ function validate () {
 }
 
 function contentValidate () {
+  //add the content to the validation modal
   const text = document.createElement("P");
   text.innerText = 'Merci pour votre inscription';              
   document.querySelector('.modal-body').appendChild(text);
   text.style.fontWeight = "300";
   text.style.fontSize = "30px";
   text.style.textAlign = "center";
-  //text.style.justifyContent = "space-between";
   const btn = document.createElement("BUTTON");
   btn.innerHTML = "Fermer";
   document.querySelector('.modal-body').appendChild(btn);
   btn.className = "btn-submit";
   btn.style.marginTop = "320px";
-  //btn.onclick = closeModal();
+  //function for the close btn
   btn.onclick = function() {
     modalbg.style.display = "none";
   };
