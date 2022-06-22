@@ -248,4 +248,7 @@ function contentValidate () {
   btn.className = "btn-submit";
   btn.style.marginTop = "320px";
   //btn.onclick = closeModal();
+  btn.onclick = function() {
+    modalbg.style.display = "none";
+  };
 }

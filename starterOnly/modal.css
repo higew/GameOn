@@ -521,6 +521,32 @@ footer {
   }
 }
 
+@media screen and (max-width: 1000px) {
+  .main-navbar i {
+    color: #fe142f;
+    margin-top: 15px;
+  }
+  .main-navbar i:hover {
+    color: #ffffff;
+  }
+
+  .hero-content {
+    padding: 0;
+    width: 100%;
+  }
+  .hero-headline {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 40px;
+    width: 80%;
+  }
+  .hero-text {
+    margin-top: 40px;
+    font-size: 15px;
+    width: 80%;
+  }
+}
+
 @keyframes modalopen {
   from {
     opacity: 0;
