@@ -69,7 +69,7 @@ function isFirstNameValid () {
   showError(parent);
 
   //Regex is Allowing Accent and also hyphen between names but not before and after names and also deny double hyphen
-  if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-zÀ-ÿ]+(?:-?[A-zÀ-ÿ]+)+$/.test(firstName.value)) {
+  if (firstName.value.trim().length < 2 || firstName.value.trim() === "" || !/^[A-zÀ-ÿ]+(?:\s|-?[A-zÀ-ÿ]+)+$/.test(firstName.value)) {
     return false;
   } 
 
@@ -82,7 +82,7 @@ function isLastNameValid () {
   showError(parent);
 
   //same as above
-  if (lastName.value.trim().length < 2 || lastName.value.trim() === "" || !/^[A-zÀ-ÿ]+(?:-?[A-zÀ-ÿ]+)+$/.test(lastName.value)) {
+  if (lastName.value.trim().length < 2 || lastName.value.trim() === "" || !/^[A-zÀ-ÿ]+(?:\s|-?[A-zÀ-ÿ]+)+$/.test(lastName.value)) {
     return false;
   } 
 
